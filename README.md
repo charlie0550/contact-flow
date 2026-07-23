@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ContactFlow 📇
 
-## Getting Started
+ContactFlow es una aplicación web moderna diseñada para la gestión eficiente de contactos, construida con **Next.js** y **Supabase**. Permite a los usuarios importar, organizar, editar y exportar contactos de manera intuitiva.
 
-First, run the development server:
+## 🚀 Características
 
+- **Gestión Completa de Contactos:** Crea, edita, ve y elimina contactos con campos personalizados, fotos y etiquetas.
+- **Importación Flexible:** Importa contactos fácilmente desde archivos `.csv` y tarjetas virtuales de formato `.vcf` (vCard).
+- **Internacionalización (i18n):** Soporte multiidioma completo (Español e Inglés).
+- **Tema Claro / Oscuro:** Interfaz moderna y adaptable que cuida tu vista.
+- **Pruebas Automatizadas:** Cobertura de pruebas unitarias con Vitest y pruebas extremo a extremo (E2E) con Playwright.
+
+## 🛠️ Tecnologías utilizadas
+
+- **Framework:** [Next.js](https://nextjs.org/) (App Router)
+- **Base de datos y Autenticación:** [Supabase](https://supabase.com/)
+- **Estilos:** Tailwind CSS y Radix UI
+- **Pruebas:** Vitest (unitarias) y Playwright (E2E)
+
+## 📦 Instalación y Configuración
+
+1. **Clona el repositorio:**
+   ```bash
+   git clone https://github.com/charlie0550/contact-flow.git
+   cd contact-flow
+   ```
+
+2. **Instala las dependencias:**
+   ```bash
+   npm install
+   ```
+
+3. **Configura las variables de entorno:**
+   Crea un archivo `.env.local` en la raíz del proyecto y añade tus credenciales de Supabase:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=tu-supabase-url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=tu-supabase-anon-key
+   ```
+
+4. **Inicia el servidor de desarrollo:**
+   ```bash
+   npm run dev
+   ```
+   Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la aplicación.
+
+## 🧪 Pruebas
+
+Para ejecutar las pruebas unitarias:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run test
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Para ejecutar las pruebas de integración/E2E con Playwright:
+```bash
+npm run test:e2e
+```
