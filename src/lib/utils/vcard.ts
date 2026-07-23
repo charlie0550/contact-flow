@@ -33,12 +33,40 @@ export function parseVCF(text: string): MappedContact[] {
         contact.job_title = clean.substring(6).trim();
       } else if (clean.startsWith("URL:")) {
         contact.website = clean.substring(4).trim();
-      } else if (clean.startsWith("TEL;")) {
-        const phone = clean.split(":").pop() || "";
-        contact.phones.push({ phone, type: "work", is_primary: contact.phones.length === 0 });
-      } else if (clean.startsWith("EMAIL;")) {
-        const email = clean.split(":").pop() || "";
-        contact.emails.push({ email, type: "work", is_primary: contact.emails.length === 0 });
+      } else if (clean.startsWith("TEL:") || clean.startsWith("TEL;")) {
+        const parts = clean.split(":");
+        const prefix = parts.shift() || "";
+        const phone = parts.join(":").trim();
+        
+        let type: "work" | "home" | "mobile" | "other" = "work";
+        const upperPrefix = prefix.toUpperCase();
+        if (upperPrefix.includes("CELL") || upperPrefix.includes("MOBILE") || upperPrefix.includes("PREF")) {
+          type = "mobile";
+        } else if (upperPrefix.includes("HOME")) {
+          type = "home";
+        } else if (upperPrefix.includes("WORK")) {
+          type = "work";
+        } else if (upperPrefix.includes("OTHER")) {
+          type = "other";
+        }
+        
+        contact.phones.push({ phone, type, is_primary: contact.phones.length === 0 });
+      } else if (clean.startsWith("EMAIL:") || clean.startsWith("EMAIL;")) {
+        const parts = clean.split(":");
+        const prefix = parts.shift() || "";
+        const email = parts.join(":").trim();
+        
+        let type: "work" | "personal" | "other" = "work";
+        const upperPrefix = prefix.toUpperCase();
+        if (upperPrefix.includes("HOME") || upperPrefix.includes("PERSONAL") || upperPrefix.includes("PREF")) {
+          type = "personal";
+        } else if (upperPrefix.includes("WORK")) {
+          type = "work";
+        } else if (upperPrefix.includes("OTHER")) {
+          type = "other";
+        }
+        
+        contact.emails.push({ email, type, is_primary: contact.emails.length === 0 });
       }
     });
 
